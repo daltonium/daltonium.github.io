@@ -5,117 +5,400 @@
   <title>Mohith Dalton Jeyaram</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f5f7fa;
-      color: #333;
+    :root {
+      --black: #000000ff;
+      --prussian-blue: #14213dff;
+      --orange: #fca311ff;
+      --alabaster-grey: #e5e5e5ff;
+      --white: #ffffffff;
     }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--alabaster-grey);
+      color: var(--prussian-blue);
+      scroll-behavior: smooth;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: var(--prussian-blue);
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      padding: 14px 20px;
+      z-index: 999;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    }
+    nav a {
+      color: var(--alabaster-grey);
+      text-decoration: none;
+      font-size: 0.88rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--orange); }
+
+    /* ── HERO ── */
     header {
-      background: #0d1117;
-      color: white;
-      padding: 20px;
+      background: var(--prussian-blue);
+      color: var(--white);
+      padding: 110px 20px 60px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(252,163,17,0.15), transparent 70%);
+      top: -100px; left: 50%; transform: translateX(-50%);
+      pointer-events: none;
+    }
+    .avatar {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: var(--orange);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.4rem; font-weight: 700;
+      color: var(--prussian-blue);
+      margin: 0 auto 18px;
+      box-shadow: 0 0 0 4px rgba(252,163,17,0.35);
+      animation: pulse 2.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(252,163,17,0.35); }
+      50%       { box-shadow: 0 0 0 10px rgba(252,163,17,0.10); }
+    }
+    header h1 { font-size: 2.4rem; letter-spacing: 1px; }
+    header .subtitle {
+      color: var(--orange);
+      font-size: 1.05rem;
+      margin: 6px 0 20px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .header-links a {
+      color: var(--alabaster-grey);
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 0.9rem;
+      border: 1px solid rgba(229,229,229,0.3);
+      padding: 6px 14px;
+      border-radius: 20px;
+      transition: all 0.25s;
+      display: inline-block;
+    }
+    .header-links a:hover {
+      background: var(--orange);
+      color: var(--prussian-blue);
+      border-color: var(--orange);
+      font-weight: 700;
+    }
+
+    /* ── SECTIONS ── */
+    .container {
+      max-width: 860px;
+      margin: 32px auto;
+      padding: 0 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
     }
     section {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-      background: white;
-      margin-top: 20px;
-      border-radius: 8px;
+      background: var(--white);
+      border-radius: 10px;
+      padding: 28px 30px;
+      box-shadow: 0 2px 14px rgba(20,33,61,0.07);
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
     }
-    h2 {
-      color: #0d1117;
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
-    a {
-      color: #0366d6;
-      text-decoration: none;
-    }
-    .skills span {
+    section h2 {
+      font-size: 1.15rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--prussian-blue);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 3px solid var(--orange);
       display: inline-block;
-      background: #e1ecf4;
-      padding: 6px 10px;
-      margin: 5px;
-      border-radius: 5px;
+    }
+
+    /* ── SKILLS ── */
+    .skills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .skills span {
+      background: var(--alabaster-grey);
+      color: var(--prussian-blue);
+      padding: 7px 14px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: default;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+    .skills span:hover {
+      background: var(--orange);
+      color: var(--prussian-blue);
+      transform: translateY(-2px);
+    }
+
+    /* ── PROJECT CARD ── */
+    .project-card {
+      border-left: 4px solid var(--orange);
+      padding-left: 16px;
+      margin-top: 6px;
+    }
+    .project-card h3 { font-size: 1rem; margin-bottom: 8px; }
+    .project-card ul { padding-left: 18px; }
+    .project-card li { margin-bottom: 5px; font-size: 0.92rem; line-height: 1.5; }
+
+    /* ── CERT LIST ── */
+    .cert-list { list-style: none; padding: 0; }
+    .cert-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--alabaster-grey);
+      font-size: 0.93rem;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .cert-list li::before {
+      content: "✦";
+      color: var(--orange);
+      font-size: 0.8rem;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-block { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 6px; }
+    .edu-block .badge {
+      background: var(--prussian-blue);
+      color: var(--orange);
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+    }
+
+    /* ── LANGUAGES ── */
+    .lang-grid { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 6px; }
+    .lang-item {
+      background: var(--alabaster-grey);
+      border-radius: 8px;
+      padding: 12px 20px;
+      text-align: center;
+      min-width: 110px;
+    }
+    .lang-item .lang-name { font-weight: 700; font-size: 0.95rem; }
+    .lang-item .lang-level { font-size: 0.78rem; color: #666; margin-top: 3px; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 28px 20px;
+      font-size: 0.82rem;
+      color: #777;
+    }
+    footer span { color: var(--orange); }
+
+    /* ── BACK TO TOP ── */
+    #backToTop {
+      position: fixed;
+      bottom: 30px; right: 30px;
+      background: var(--orange);
+      color: var(--prussian-blue);
+      border: none;
+      border-radius: 50%;
+      width: 44px; height: 44px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 14px rgba(252,163,17,0.5);
+      transition: transform 0.2s;
+      z-index: 999;
+    }
+    #backToTop:hover { transform: scale(1.12); }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.7rem; }
+      section { padding: 20px 16px; }
     }
   </style>
 </head>
 <body>
 
+<!-- NAV -->
+<nav>
+  <a href="#summary">About</a>
+  <a href="#education">Education</a>
+  <a href="#skills">Skills</a>
+  <a href="#projects">Projects</a>
+  <a href="#certifications">Certs</a>
+</nav>
+
+<!-- HERO -->
 <header>
+  <div class="avatar">MJ</div>
   <h1>Mohith Dalton Jeyaram</h1>
-  <p>Computer Science Undergraduate</p>
-  <p>
-    <a href="mailto:dalton.mdj@gmail.com">Email</a> |
-    <a href="https://linkedin.com/in/mohith-jeyaram-a4baa6306">LinkedIn</a> |
-    <a href="https://github.com/daltonium">GitHub</a>
-  </p>
+  <p class="subtitle">Computer Science Undergraduate</p>
+  <div class="header-links">
+    <a href="mailto:dalton.mdj@gmail.com">✉ Email</a>
+    <a href="https://linkedin.com/in/mohith-jeyaram-a4baa6306" target="_blank">in LinkedIn</a>
+    <a href="https://github.com/daltonium" target="_blank">⌥ GitHub</a>
+  </div>
 </header>
 
-<section>
-  <h2>Professional Summary</h2>
-  <p>
-    Highly motivated Computer Science undergraduate with hands-on experience
-    in building secure REST APIs using Flask, Docker, and JWT.
-    Passionate about AI, quantum computing, and scalable systems.
-  </p>
-</section>
+<div class="container">
 
-<section>
-  <h2>Education</h2>
-  <p>
-    <strong>B.E. Computer Science and Engineering</strong><br>
-    Dr. Sivanthi Aditanar College of Engineering, Tiruchendur<br>
-    Expected Graduation: 2028
-  </p>
-</section>
+  <!-- SUMMARY -->
+  <section id="summary">
+    <h2>Professional Summary</h2>
+    <p style="line-height:1.75; font-size:0.97rem;">
+      Highly motivated Computer Science undergraduate with hands-on experience in building
+      secure REST APIs using <strong>Flask</strong>, <strong>Docker</strong>, and <strong>JWT</strong>.
+      Passionate about AI, quantum computing, and scalable systems. Seeking opportunities to contribute
+      to innovative engineering teams.
+    </p>
+  </section>
 
-<section>
-  <h2>Technical Skills</h2>
-  <div class="skills">
-    <span>Python</span>
-    <span>Java</span>
-    <span>C</span>
-    <span>C++</span>
-    <span>Flask</span>
-    <span>Docker</span>
-    <span>Git</span>
-    <span>REST APIs</span>
-    <span>OOP</span>
-    <span>Data Structures</span>
-  </div>
-</section>
+  <!-- EDUCATION -->
+  <section id="education">
+    <h2>Education</h2>
+    <div class="edu-block">
+      <div>
+        <strong>B.E. Computer Science and Engineering</strong><br>
+        <span style="font-size:0.92rem; color:#555;">Dr. Sivanthi Aditanar College of Engineering, Tiruchendur</span>
+      </div>
+      <span class="badge">Exp. 2028</span>
+    </div>
+  </section>
 
-<section>
-  <h2>Projects</h2>
-  <h3>Flask Store API</h3>
-  <ul>
-    <li>Developed REST API using Flask & SQLAlchemy</li>
-    <li>Implemented JWT authentication</li>
-    <li>Supported full CRUD operations</li>
-    <li>Dockerized application</li>
-    <li>Tested using Postman</li>
-  </ul>
-</section>
+  <!-- SKILLS -->
+  <section id="skills">
+    <h2>Technical Skills</h2>
+    <div class="skills">
+      <span>Python</span><span>Java</span><span>C</span><span>C++</span>
+      <span>Flask</span><span>Docker</span><span>Git</span>
+      <span>REST APIs</span><span>OOP</span><span>Data Structures</span>
+    </div>
+  </section>
 
-<section>
-  <h2>Certifications</h2>
-  <ul>
-    <li>REST APIs with Flask & Python (Udemy - 2025)</li>
-    <li>Python Course - Cybernaut (2025)</li>
-    <li>Java Course - Cybernaut (2025)</li>
-    <li>C++ Course - Cybernaut (2024)</li>
-  </ul>
-</section>
+  <!-- PROJECTS -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project-card">
+      <h3>Flask Store API</h3>
+      <ul>
+        <li>Developed a REST API using <strong>Flask &amp; SQLAlchemy</strong></li>
+        <li>Implemented <strong>JWT authentication</strong> for secure endpoints</li>
+        <li>Supported full <strong>CRUD operations</strong></li>
+        <li>Containerized with <strong>Docker</strong> for portable deployment</li>
+        <li>Tested end-to-end using <strong>Postman</strong></li>
+      </ul>
+    </div>
+  </section>
 
-<section>
-  <h2>Languages</h2>
-  <ul>
-    <li>Tamil (Native)</li>
-    <li>English (Fluent)</li>
-  </ul>
-</section>
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <h2>Certifications</h2>
+    <ul class="cert-list">
+      <li>REST APIs with Flask &amp; Python — <strong>Udemy</strong> (2025)</li>
+      <li>Python Course — <strong>Cybernaut</strong> (2025)</li>
+      <li>Java Course — <strong>Cybernaut</strong> (2025)</li>
+      <li>C++ Course — <strong>Cybernaut</strong> (2024)</li>
+    </ul>
+  </section>
+
+  <!-- LANGUAGES -->
+  <section id="languages">
+    <h2>Languages</h2>
+    <div class="lang-grid">
+      <div class="lang-item">
+        <div class="lang-name">Tamil</div>
+        <div class="lang-level">Native</div>
+      </div>
+      <div class="lang-item">
+        <div class="lang-name">English</div>
+        <div class="lang-level">Fluent</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  &copy; 2026 <span>Mohith Dalton Jeyaram</span> · Built with passion
+</footer>
+
+<!-- Back to top -->
+<button id="backToTop" title="Back to top">↑</button>
+
+<script>
+  // ── Scroll-reveal for sections ──
+  const sections = document.querySelectorAll("section");
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add("visible");
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  sections.forEach(s => observer.observe(s));
+
+  // ── Back to top button ──
+  const btn = document.getElementById("backToTop");
+  window.addEventListener("scroll", () => {
+    btn.style.display = window.scrollY > 300 ? "flex" : "none";
+  });
+  btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+  // ── Active nav highlight ──
+  const navLinks = document.querySelectorAll("nav a");
+  const sectionEls = document.querySelectorAll("section[id]");
+  window.addEventListener("scroll", () => {
+    let current = "";
+    sectionEls.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 80) current = sec.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute("href") === "#" + current
+        ? "var(--orange)" : "var(--alabaster-grey)";
+    });
+  });
+
+  // ── Skill badge click ripple ──
+  document.querySelectorAll(".skills span").forEach(tag => {
+    tag.addEventListener("click", function () {
+      this.style.transform = "scale(0.9)";
+      setTimeout(() => this.style.transform = "", 150);
+    });
+  });
+
+  // ── Typed subtitle effect ──
+  const subtitle = document.querySelector("header .subtitle");
+  const text = subtitle.textContent;
+  subtitle.textContent = "";
+  let i = 0;
+  function typeChar() {
+    if (i < text.length) {
+      subtitle.textContent += text[i++];
+      setTimeout(typeChar, 55);
+    }
+  }
+  typeChar();
+</script>
 
 </body>
 </html>
